@@ -1,0 +1,1835 @@
+{
+	"info": {
+		"_postman_id": "05e74672-fa76-4037-9b4e-b9e0f24d1dc5",
+		"name": "Football Backend API",
+		"description": "Complete API collection for Football Backend with updated minute string format and auto-token script",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23961991"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"viewer2\",\n  \"password\": \"secret123\",\n  \"role\": \"VIEWER\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"viewer2\",\n  \"password\": \"secret123\",\n  \"role\": \"VIEWER\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 14:17:24 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"message\": \"User berhasil dibuat\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let d = pm.response.json().data;",
+									"",
+									"pm.environment.set(\"token\", d.access_token);",
+									"pm.environment.set(\"refresh_token\", d.refresh_token);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin1\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"admin1\",\n  \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 09:29:10 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "441"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Login berhasil\",\n    \"data\": {\n        \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjU1MzI2NTAsInJvbGUiOiJBRE1JTiIsInVzZXJfaWQiOjF9.m8J7TImfwY1L3OjoYjzBHWQnv4BOC9Nb8Ic4-KIi_OM\",\n        \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjYxMzY1NTAsInJvbGUiOiJBRE1JTiIsInR5cGUiOiJyZWZyZXNoIiwidXNlcl9pZCI6MX0.saYNzyP56BNnv0RWWa0ngzeVzUHWssCj0ehvrR40_t4\",\n        \"user\": {\n            \"id\": 1,\n            \"username\": \"admin1\",\n            \"role\": \"ADMIN\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Me",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/me",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 11:34:19 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "104"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Profil user berhasil diambil\",\n    \"data\": {\n        \"id\": 1,\n        \"username\": \"admin1\",\n        \"role\": \"ADMIN\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// pm.environment.set(\"token\", \"\");\r",
+									"// pm.environment.set(\"refresh_token\", \"\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refresh_token\": \"{{refresh_token}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refresh_token\": \"{{refresh_token}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/logout",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 11:53:34 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 401,\n    \"message\": \"refresh token tidak valid\",\n    \"data\": null\n}"
+						},
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refresh_token\": \"{{refresh_token}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/logout",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 11:54:25 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Berhasil logout\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let d = pm.response.json().data;\r",
+									"\r",
+									"pm.environment.set(\"token\", d.access_token);\r",
+									"pm.environment.set(\"refresh_token\", d.refresh_token);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refresh_token\": \"{{refresh_token}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/refresh",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Refresh Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refresh_token\": \"{{refresh_token}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/refresh",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"refresh"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 14:14:19 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "560"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Token diperbarui\",\n    \"data\": {\n        \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjU1NDk3NTksImlhdCI6MTc2NTU0ODg1OSwicm9sZSI6IkFETUlOIiwidXNlcl9pZCI6MSwidmVyIjoyfQ.Zja7xyrqQWdUL-F5BgOJSQF86my37UMneFefg2HhYSk\",\n        \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjYxNTM2NTksImlhdCI6MTc2NTU0ODg1OSwianRpIjoiNTYzNTQzN2MtMWRlNi00MDkxLWEyMGItOGI2MzI5YjRiOWI3Iiwicm9sZSI6IkFETUlOIiwidHlwZSI6InJlZnJlc2giLCJ1c2VyX2lkIjoxfQ.5pSlECoD5vLaBqzEx-G24d7boDYXxbVYxi-MP8CihiQ\",\n        \"user\": {\n            \"id\": 1,\n            \"username\": \"admin1\",\n            \"role\": \"ADMIN\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Goals",
+			"item": [
+				{
+					"name": "Get Goals by Match",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/goals/match/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"goals",
+								"match",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Goals by Match",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/goals/match/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"goals",
+										"match",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 12:38:13 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "340"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Data gol berhasil diambil\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"minute\": \"30\",\n            \"team\": {\n                \"id\": 4,\n                \"name\": \"Persis\",\n                \"logo_url\": \"https://example.com/logo.png\",\n                \"year_founded\": 1990,\n                \"address\": \"Jl Mangga\",\n                \"city\": \"Cilacap\"\n            },\n            \"scorer\": {\n                \"id\": 1,\n                \"name\": \"Rudi\",\n                \"height\": 175,\n                \"weight\": 70,\n                \"position\": \"PENYERANG\",\n                \"jersey_number\": 10,\n                \"team\": {\n                    \"id\": 0,\n                    \"name\": \"\"\n                }\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Top Scorers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/goals/top-scorers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"goals",
+								"top-scorers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Top Scorers",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/goals/top-scorers",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"goals",
+										"top-scorers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 13:10:36 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "123"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Top skor berhasil diambil\",\n    \"data\": [\n        {\n            \"player_id\": 8,\n            \"total_goals\": 4\n        },\n        {\n            \"player_id\": 1,\n            \"total_goals\": 1\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Add Goal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"match_id\": 1,\n  \"team_id\": 2,\n  \"scorer_player_id\": 8,\n  \"minute\": \"90\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/goals",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"goals"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Goal (Staff)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"match_id\": 1,\n  \"team_id\": 2,\n  \"scorer_player_id\": 8,\n  \"minute\": \"90\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/goals",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"goals"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 13:10:30 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "61"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"message\": \"Gol berhasil ditambahkan\",\n    \"data\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Matches",
+			"item": [
+				{
+					"name": "Get All Matches",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/matches",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"matches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Match by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/matches/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"matches",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Match by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/matches/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"matches",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 13:22:18 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1864"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Data pertandingan berhasil diambil\",\n    \"data\": {\n        \"id\": 1,\n        \"match_date\": \"2025-12-10T21:00:00+07:00\",\n        \"status\": \"SEDANG BERLANGSUNG\",\n        \"home_team\": {\n            \"id\": 4,\n            \"name\": \"Persis\",\n            \"logo_url\": \"https://example.com/logo.png\",\n            \"year_founded\": 1990,\n            \"address\": \"Jl Mangga\",\n            \"city\": \"Cilacap\"\n        },\n        \"away_team\": {\n            \"id\": 2,\n            \"name\": \"PSS\",\n            \"logo_url\": \"https://example.com/logo.png\",\n            \"year_founded\": 1990,\n            \"address\": \"Jl Mangga\",\n            \"city\": \"Sleman\"\n        },\n        \"goals\": [\n            {\n                \"id\": 1,\n                \"minute\": \"30\",\n                \"team\": {\n                    \"id\": 4,\n                    \"name\": \"Persis\",\n                    \"logo_url\": \"https://example.com/logo.png\",\n                    \"year_founded\": 1990,\n                    \"address\": \"Jl Mangga\",\n                    \"city\": \"Cilacap\"\n                },\n                \"scorer\": {\n                    \"id\": 1,\n                    \"name\": \"Rudi\",\n                    \"height\": 175,\n                    \"weight\": 70,\n                    \"position\": \"PENYERANG\",\n                    \"jersey_number\": 10,\n                    \"team\": {\n                        \"id\": 0,\n                        \"name\": \"\"\n                    }\n                }\n            },\n            {\n                \"id\": 7,\n                \"minute\": \"45+2\",\n                \"team\": {\n                    \"id\": 2,\n                    \"name\": \"PSS\",\n                    \"logo_url\": \"https://example.com/logo.png\",\n                    \"year_founded\": 1990,\n                    \"address\": \"Jl Mangga\",\n                    \"city\": \"Sleman\"\n                },\n                \"scorer\": {\n                    \"id\": 8,\n                    \"name\": \"Rudi\",\n                    \"height\": 175,\n                    \"weight\": 70,\n                    \"position\": \"PENYERANG\",\n                    \"jersey_number\": 12,\n                    \"team\": {\n                        \"id\": 2,\n                        \"name\": \"PSS\"\n                    }\n                }\n            },\n            {\n                \"id\": 8,\n                \"minute\": \"45+3\",\n                \"team\": {\n                    \"id\": 2,\n                    \"name\": \"PSS\",\n                    \"logo_url\": \"https://example.com/logo.png\",\n                    \"year_founded\": 1990,\n                    \"address\": \"Jl Mangga\",\n                    \"city\": \"Sleman\"\n                },\n                \"scorer\": {\n                    \"id\": 8,\n                    \"name\": \"Rudi\",\n                    \"height\": 175,\n                    \"weight\": 70,\n                    \"position\": \"PENYERANG\",\n                    \"jersey_number\": 12,\n                    \"team\": {\n                        \"id\": 2,\n                        \"name\": \"PSS\"\n                    }\n                }\n            },\n            {\n                \"id\": 9,\n                \"minute\": \"47\",\n                \"team\": {\n                    \"id\": 2,\n                    \"name\": \"PSS\",\n                    \"logo_url\": \"https://example.com/logo.png\",\n                    \"year_founded\": 1990,\n                    \"address\": \"Jl Mangga\",\n                    \"city\": \"Sleman\"\n                },\n                \"scorer\": {\n                    \"id\": 8,\n                    \"name\": \"Rudi\",\n                    \"height\": 175,\n                    \"weight\": 70,\n                    \"position\": \"PENYERANG\",\n                    \"jersey_number\": 12,\n                    \"team\": {\n                        \"id\": 2,\n                        \"name\": \"PSS\"\n                    }\n                }\n            },\n            {\n                \"id\": 10,\n                \"minute\": \"90\",\n                \"team\": {\n                    \"id\": 2,\n                    \"name\": \"PSS\",\n                    \"logo_url\": \"https://example.com/logo.png\",\n                    \"year_founded\": 1990,\n                    \"address\": \"Jl Mangga\",\n                    \"city\": \"Sleman\"\n                },\n                \"scorer\": {\n                    \"id\": 8,\n                    \"name\": \"Rudi\",\n                    \"height\": 175,\n                    \"weight\": 70,\n                    \"position\": \"PENYERANG\",\n                    \"jersey_number\": 12,\n                    \"team\": {\n                        \"id\": 2,\n                        \"name\": \"PSS\"\n                    }\n                }\n            }\n        ],\n        \"home_score\": 1,\n        \"away_score\": 4\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Match Report",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/matches/1/report",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"matches",
+								"1",
+								"report"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Match Report",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/matches/1/report",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"matches",
+										"1",
+										"report"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 13:22:26 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1361"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Report pertandingan berhasil diambil\",\n    \"data\": {\n        \"away_wins\": 0,\n        \"goals\": [\n            {\n                \"minute\": \"30\",\n                \"player\": {\n                    \"id\": 1,\n                    \"jersey_number\": 10,\n                    \"name\": \"Rudi\",\n                    \"position\": \"PENYERANG\"\n                }\n            },\n            {\n                \"minute\": \"45+2\",\n                \"player\": {\n                    \"id\": 8,\n                    \"jersey_number\": 12,\n                    \"name\": \"Rudi\",\n                    \"position\": \"PENYERANG\"\n                }\n            },\n            {\n                \"minute\": \"45+3\",\n                \"player\": {\n                    \"id\": 8,\n                    \"jersey_number\": 12,\n                    \"name\": \"Rudi\",\n                    \"position\": \"PENYERANG\"\n                }\n            },\n            {\n                \"minute\": \"47\",\n                \"player\": {\n                    \"id\": 8,\n                    \"jersey_number\": 12,\n                    \"name\": \"Rudi\",\n                    \"position\": \"PENYERANG\"\n                }\n            },\n            {\n                \"minute\": \"90\",\n                \"player\": {\n                    \"id\": 8,\n                    \"jersey_number\": 12,\n                    \"name\": \"Rudi\",\n                    \"position\": \"PENYERANG\"\n                }\n            }\n        ],\n        \"home_wins\": 0,\n        \"match\": {\n            \"away_team\": {\n                \"ID\": 2,\n                \"CreatedAt\": \"2025-12-12T13:02:44.723+07:00\",\n                \"UpdatedAt\": \"2025-12-12T13:02:44.723+07:00\",\n                \"DeletedAt\": null,\n                \"Name\": \"PSS\",\n                \"LogoURL\": \"https://example.com/logo.png\",\n                \"YearFounded\": 1990,\n                \"Address\": \"Jl Mangga\",\n                \"City\": \"Sleman\",\n                \"Players\": null,\n                \"HomeMatches\": null,\n                \"AwayMatches\": null\n            },\n            \"home_team\": {\n                \"ID\": 4,\n                \"CreatedAt\": \"2025-12-12T13:03:03.406+07:00\",\n                \"UpdatedAt\": \"2025-12-12T13:03:03.406+07:00\",\n                \"DeletedAt\": null,\n                \"Name\": \"Persis\",\n                \"LogoURL\": \"https://example.com/logo.png\",\n                \"YearFounded\": 1990,\n                \"Address\": \"Jl Mangga\",\n                \"City\": \"Cilacap\",\n                \"Players\": null,\n                \"HomeMatches\": null,\n                \"AwayMatches\": null\n            },\n            \"id\": 1,\n            \"match_date\": \"2025-12-10T21:00:00+07:00\"\n        },\n        \"score\": {\n            \"away\": 4,\n            \"home\": 1\n        },\n        \"status\": \"Draw\",\n        \"top_scorer\": {\n            \"goals\": 4,\n            \"height\": 175,\n            \"id\": 8,\n            \"jersey_number\": 12,\n            \"name\": \"Rudi\",\n            \"position\": \"PENYERANG\",\n            \"weight\": 70\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Standing",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/matches/standing",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"matches",
+								"standing"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/matches/standing",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"matches",
+										"standing"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 13:43:12 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1035"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Standing berhasil diambil\",\n    \"data\": [\n        {\n            \"team_id\": 2,\n            \"team_name\": \"PSS\",\n            \"played\": 1,\n            \"wins\": 1,\n            \"draws\": 0,\n            \"losses\": 0,\n            \"goals_for\": 7,\n            \"goals_against\": 1,\n            \"goal_difference\": 6,\n            \"points\": 3\n        },\n        {\n            \"team_id\": 3,\n            \"team_name\": \"PSIS\",\n            \"played\": 0,\n            \"wins\": 0,\n            \"draws\": 0,\n            \"losses\": 0,\n            \"goals_for\": 0,\n            \"goals_against\": 0,\n            \"goal_difference\": 0,\n            \"points\": 0\n        },\n        {\n            \"team_id\": 5,\n            \"team_name\": \"Periska\",\n            \"played\": 0,\n            \"wins\": 0,\n            \"draws\": 0,\n            \"losses\": 0,\n            \"goals_for\": 0,\n            \"goals_against\": 0,\n            \"goal_difference\": 0,\n            \"points\": 0\n        },\n        {\n            \"team_id\": 6,\n            \"team_name\": \"Perses\",\n            \"played\": 0,\n            \"wins\": 0,\n            \"draws\": 0,\n            \"losses\": 0,\n            \"goals_for\": 0,\n            \"goals_against\": 0,\n            \"goal_difference\": 0,\n            \"points\": 0\n        },\n        {\n            \"team_id\": 7,\n            \"team_name\": \"Mutiara\",\n            \"played\": 0,\n            \"wins\": 0,\n            \"draws\": 0,\n            \"losses\": 0,\n            \"goals_for\": 0,\n            \"goals_against\": 0,\n            \"goal_difference\": 0,\n            \"points\": 0\n        },\n        {\n            \"team_id\": 8,\n            \"team_name\": \"Bali United\",\n            \"played\": 0,\n            \"wins\": 0,\n            \"draws\": 0,\n            \"losses\": 0,\n            \"goals_for\": 0,\n            \"goals_against\": 0,\n            \"goal_difference\": 0,\n            \"points\": 0\n        },\n        {\n            \"team_id\": 4,\n            \"team_name\": \"Persis\",\n            \"played\": 1,\n            \"wins\": 0,\n            \"draws\": 0,\n            \"losses\": 1,\n            \"goals_for\": 1,\n            \"goals_against\": 7,\n            \"goal_difference\": -6,\n            \"points\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Match",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"match_date_time\": \"2025-01-20T14:00:00Z\",\n  \"home_team_id\": 3,\n  \"away_team_id\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/matches",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"matches"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Match",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"match_date_time\": \"2025-01-20T14:00:00Z\",\n  \"home_team_id\": 3,\n  \"away_team_id\": 4\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/matches",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"matches"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 12:43:28 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"message\": \"Pertandingan berhasil dibuat\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Match",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"SELESAI\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/matches/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"matches",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Match",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"status\": \"SEDANG BERLANGSUNG\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/matches/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"matches",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 13:04:51 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "737"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Pertandingan berhasil diperbarui\",\n    \"data\": {\n        \"id\": 1,\n        \"match_date\": \"2025-12-10T21:00:00+07:00\",\n        \"status\": \"SEDANG BERLANGSUNG\",\n        \"home_team\": {\n            \"id\": 4,\n            \"name\": \"Persis\",\n            \"logo_url\": \"https://example.com/logo.png\",\n            \"year_founded\": 1990,\n            \"address\": \"Jl Mangga\",\n            \"city\": \"Cilacap\"\n        },\n        \"away_team\": {\n            \"id\": 2,\n            \"name\": \"PSS\",\n            \"logo_url\": \"https://example.com/logo.png\",\n            \"year_founded\": 1990,\n            \"address\": \"Jl Mangga\",\n            \"city\": \"Sleman\"\n        },\n        \"goals\": [\n            {\n                \"id\": 1,\n                \"minute\": \"30\",\n                \"team\": {\n                    \"id\": 4,\n                    \"name\": \"Persis\",\n                    \"logo_url\": \"https://example.com/logo.png\",\n                    \"year_founded\": 1990,\n                    \"address\": \"Jl Mangga\",\n                    \"city\": \"Cilacap\"\n                },\n                \"scorer\": {\n                    \"id\": 1,\n                    \"name\": \"Rudi\",\n                    \"height\": 175,\n                    \"weight\": 70,\n                    \"position\": \"PENYERANG\",\n                    \"jersey_number\": 10,\n                    \"team\": {\n                        \"id\": 0,\n                        \"name\": \"\"\n                    }\n                }\n            }\n        ],\n        \"home_score\": 1,\n        \"away_score\": 0\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Players",
+			"item": [
+				{
+					"name": "Get All Players",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/players",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"players"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Players",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/players",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"players"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 13:43:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "727"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Data pemain berhasil diambil\",\n    \"data\": {\n        \"items\": [\n            {\n                \"id\": 1,\n                \"name\": \"Rudi\",\n                \"height\": 175,\n                \"weight\": 70,\n                \"position\": \"PENYERANG\",\n                \"jersey_number\": 10,\n                \"team\": {\n                    \"id\": 0,\n                    \"name\": \"\"\n                }\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Rudi\",\n                \"height\": 175,\n                \"weight\": 70,\n                \"position\": \"PENYERANG\",\n                \"jersey_number\": 5,\n                \"team\": {\n                    \"id\": 2,\n                    \"name\": \"PSS\"\n                }\n            },\n            {\n                \"id\": 6,\n                \"name\": \"Randi\",\n                \"height\": 175,\n                \"weight\": 70,\n                \"position\": \"PENYERANG\",\n                \"jersey_number\": 11,\n                \"team\": {\n                    \"id\": 3,\n                    \"name\": \"PSIS\"\n                }\n            },\n            {\n                \"id\": 7,\n                \"name\": \"Rudi\",\n                \"height\": 175,\n                \"weight\": 70,\n                \"position\": \"PENYERANG\",\n                \"jersey_number\": 10,\n                \"team\": {\n                    \"id\": 3,\n                    \"name\": \"PSIS\"\n                }\n            },\n            {\n                \"id\": 8,\n                \"name\": \"Rudi\",\n                \"height\": 175,\n                \"weight\": 70,\n                \"position\": \"PENYERANG\",\n                \"jersey_number\": 12,\n                \"team\": {\n                    \"id\": 2,\n                    \"name\": \"PSS\"\n                }\n            }\n        ],\n        \"pagination\": {\n            \"limit\": 20,\n            \"page\": 1,\n            \"total\": 5,\n            \"total_pages\": 1\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Player by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/players/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"players",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Player by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/players/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"players",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 13:43:46 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "176"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Data pemain berhasil diambil\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Rudi\",\n        \"height\": 175,\n        \"weight\": 70,\n        \"position\": \"PENYERANG\",\n        \"jersey_number\": 10,\n        \"team\": {\n            \"id\": 0,\n            \"name\": \"\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Players by Team",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/players/by-team/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"players",
+								"by-team",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Players by Team",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/players/by-team/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"players",
+										"by-team",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 13:44:03 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "299"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Data pemain berhasil diambil\",\n    \"data\": [\n        {\n            \"id\": 3,\n            \"name\": \"Rudi\",\n            \"height\": 175,\n            \"weight\": 70,\n            \"position\": \"PENYERANG\",\n            \"jersey_number\": 5,\n            \"team\": {\n                \"id\": 2,\n                \"name\": \"PSS\"\n            }\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Rudi\",\n            \"height\": 175,\n            \"weight\": 70,\n            \"position\": \"PENYERANG\",\n            \"jersey_number\": 12,\n            \"team\": {\n                \"id\": 2,\n                \"name\": \"PSS\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Player",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"team_id\": 5,\n  \"name\": \"Lionel Messi\",\n  \"height\": 170,\n  \"weight\": 72,\n  \"position\": \"PENYERANG\",\n  \"jersey_number\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/players",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"players"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Player",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"team_id\": 5,\n  \"name\": \"Lionel Messi\",\n  \"height\": 170,\n  \"weight\": 72,\n  \"position\": \"PENYERANG\",\n  \"jersey_number\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/players",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"players"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 13:44:23 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "185"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 201,\n    \"message\": \"Pemain berhasil dibuat\",\n    \"data\": {\n        \"id\": 9,\n        \"name\": \"Lionel Messi\",\n        \"height\": 170,\n        \"weight\": 72,\n        \"position\": \"PENYERANG\",\n        \"jersey_number\": 10,\n        \"team\": {\n            \"id\": 5,\n            \"name\": \"Periska\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Create Player",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"team_id\": 5,\n  \"name\": \"Lionel Messi\",\n  \"height\": 170,\n  \"weight\": 72,\n  \"position\": \"PENYERANG\",\n  \"jersey_number\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/players",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"players"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 13:44:34 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 409,\n    \"message\": \"nomor punggung sudah digunakan dalam tim ini\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Player",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Leo Messi Updated\",\n  \"position\": \"GELANDANG\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/players/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"players",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer Player",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"new_team_id\": 2,\n  \"jersey_number\": 30\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/players/1/transfer",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"players",
+								"1",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Player",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/players/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"players",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teams",
+			"item": [
+				{
+					"name": "Get All Teams",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/teams",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"teams"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Teams",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/teams",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"teams"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 13:44:45 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1008"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Data tim berhasil diambil\",\n    \"data\": {\n        \"items\": [\n            {\n                \"id\": 2,\n                \"name\": \"PSS\",\n                \"logo_url\": \"https://example.com/logo.png\",\n                \"year_founded\": 1990,\n                \"address\": \"Jl Mangga\",\n                \"city\": \"Sleman\"\n            },\n            {\n                \"id\": 3,\n                \"name\": \"PSIS\",\n                \"logo_url\": \"https://example.com/logo.png\",\n                \"year_founded\": 1990,\n                \"address\": \"Jl Mangga\",\n                \"city\": \"Cilacap\"\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Persis\",\n                \"logo_url\": \"https://example.com/logo.png\",\n                \"year_founded\": 1990,\n                \"address\": \"Jl Mangga\",\n                \"city\": \"Cilacap\"\n            },\n            {\n                \"id\": 5,\n                \"name\": \"Periska\",\n                \"logo_url\": \"https://example.com/logo.png\",\n                \"year_founded\": 1990,\n                \"address\": \"Jl Mangga\",\n                \"city\": \"Cilacap\"\n            },\n            {\n                \"id\": 6,\n                \"name\": \"Perses\",\n                \"logo_url\": \"https://example.com/logo.png\",\n                \"year_founded\": 1990,\n                \"address\": \"Jl Mangga\",\n                \"city\": \"Cilacap\"\n            },\n            {\n                \"id\": 7,\n                \"name\": \"Mutiara\",\n                \"logo_url\": \"https://example.com/logo.png\",\n                \"year_founded\": 1990,\n                \"address\": \"Jl Mangga\",\n                \"city\": \"Papua\"\n            },\n            {\n                \"id\": 8,\n                \"name\": \"Bali United\",\n                \"logo_url\": \"https://example.com/logo.png\",\n                \"year_founded\": 1990,\n                \"address\": \"Jl Mangga\",\n                \"city\": \"Bali\"\n            }\n        ],\n        \"pagination\": {\n            \"limit\": 20,\n            \"page\": 1,\n            \"total\": 7,\n            \"total_pages\": 1\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Team by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/teams/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"teams",
+								"1"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Team",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Barcelona\",\n  \"logo_url\": \"https://example.com/logo.png\",\n  \"year_founded\": 1899,\n  \"address\": \"Camp Nou\",\n  \"city\": \"Barcelona\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/teams",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"teams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Team",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Barcelona Updated\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/teams/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"teams",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Team",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/teams/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"teams",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Admin Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Dec 2025 14:14:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "212"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Data admin berhasil diambil\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"created_at\": \"2025-12-12T12:52:24.096+07:00\",\n            \"updated_at\": \"2025-12-12T21:14:19.023+07:00\",\n            \"username\": \"admin1\",\n            \"role\": \"ADMIN\",\n            \"TokenVersion\": 2\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080/api/v1"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
