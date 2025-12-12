@@ -1,7 +1,6 @@
 # 🏆 Football Backend API
 
 **Football Backend** adalah RESTful API berbasis **Golang** untuk mengelola data tim, pemain, pertandingan, gol, serta autentikasi (JWT + refresh token) dengan dukungan RBAC.  
-Dokumentasi ini dibuat berdasarkan Postman Collection & Environment yang Anda unggah. Referensi collection & environment: fileciteturn0file1 fileciteturn0file0
 
 ---
 
@@ -53,7 +52,6 @@ DB_PASS=pass
 DB_NAME=football_db
 ```
 
-Anda juga bisa memanfaatkan Postman Environment yang sudah disediakan: buka file `Football Backend Environment.postman_environment.json`. fileciteturn0file0
 
 ---
 
@@ -68,20 +66,19 @@ go build -o football-app cmd/main.go
 ./football-app
 ```
 
-Server default berjalan di `http://localhost:8080` (atau `{{base_url}}` sesuai environment Postman). fileciteturn0file0
+Server default berjalan di `http://localhost:8080` (atau `{{base_url}}` sesuai environment Postman). 
 
 ---
 
 ## 📥 Import Postman Collection (cara cepat)
-1. Buka Postman → Import → pilih `Football Backend API.postman_collection.json` (file Anda). fileciteturn0file1  
-2. Import Environment: `Football Backend Environment.postman_environment.json`. fileciteturn0file0  
+1. Buka Postman → Import → pilih `Football Backend API.postman_collection.json` (file Anda). 
+2. Import Environment: `Football Backend Environment.postman_environment.json`.  
 3. Set variable `base_url` jika perlu (default: `http://localhost:8080/api/v1`).  
-4. Jalankan request `Auth → Login` untuk mendapatkan token. Skrip otomatis akan menyimpan `token` & `refresh_token` ke environment. (Script ada pada request Login & Refresh di collection). fileciteturn0file1
+4. Jalankan request `Auth → Login` untuk mendapatkan token. Skrip otomatis akan menyimpan `token` & `refresh_token` ke environment. (Script ada pada request Login & Refresh di collection). 
 
 ---
 
 ## 📘 Dokumentasi Endpoint Lengkap
-> Semua contoh request/response diambil dari Postman Collection yang Anda unggah. Lihat collection untuk contoh lengkap dan sample response. fileciteturn0file1
 
 ### Base URL
 ```
@@ -110,7 +107,7 @@ Server default berjalan di `http://localhost:8080` (atau `{{base_url}}` sesuai e
   "data": null
 }
 ```
-Contoh ada di collection `Auth → Register`. fileciteturn0file1
+Contoh ada di collection `Auth → Register`. 
 
 ---
 
@@ -123,7 +120,7 @@ Contoh ada di collection `Auth → Register`. fileciteturn0file1
   "password": "123456"
 }
 ```
-- Script: Setelah sukses, Postman menyimpan token ke environment (`token` & `refresh_token`). (lihat event `test` pada request). fileciteturn0file1
+- Script: Setelah sukses, Postman menyimpan token ke environment (`token` & `refresh_token`). (lihat event `test` pada request). 
 - Response (200) (potongan):
 ```json
 {
@@ -152,7 +149,7 @@ Contoh ada di collection `Auth → Register`. fileciteturn0file1
   "refresh_token": "{{refresh_token}}"
 }
 ```
-- Response (200): mengembalikan access & refresh token baru. Postman script otomatis menyimpan kembali. fileciteturn0file1
+- Response (200): mengembalikan access & refresh token baru. Postman script otomatis menyimpan kembali. 
 
 ---
 
@@ -164,14 +161,14 @@ Contoh ada di collection `Auth → Register`. fileciteturn0file1
   "refresh_token": "{{refresh_token}}"
 }
 ```
-- Response: 200 atau 401 jika token tidak valid. Contoh di collection. fileciteturn0file1
+- Response: 200 atau 401 jika token tidak valid. Contoh di collection. 
 
 ---
 
 ### USER
 > Role: Admin untuk sebagian besar operasi user.
 
-- GET `/me` — ambil profil user saat ini (Authorization: Bearer {{token}}). Contoh response di collection. fileciteturn0file1
+- GET `/me` — ambil profil user saat ini (Authorization: Bearer {{token}}). Contoh response di collection. 
 
 - GET `/users`  
 - GET `/users/{id}`  
@@ -198,7 +195,7 @@ Contoh ada di collection `Auth → Register`. fileciteturn0file1
 - PUT `/teams/{id}`  
 - DELETE `/teams/{id}`
 
-Contoh responses tersedia in collection `Teams`. fileciteturn0file1
+Contoh responses tersedia in collection `Teams`. 
 
 ---
 
@@ -221,13 +218,13 @@ Contoh responses tersedia in collection `Teams`. fileciteturn0file1
 - DELETE `/players/{id}`  
 - POST `/players/{id}/transfer` — transfer pemain (body: new_team_id, jersey_number)
 
-Contoh dan kasus error seperti `409 Conflict` (nomer punggung duplicate) ada di collection. fileciteturn0file1
+Contoh dan kasus error seperti `409 Conflict` (nomer punggung duplicate) ada di collection. 
 
 ---
 
 ### MATCHES
 - GET `/matches`  
-- GET `/matches/{id}` — detail match + goals + scores (lihat sample besar di collection). fileciteturn0file1
+- GET `/matches/{id}` — detail match + goals + scores (lihat sample besar di collection). 
 - GET `/matches/{id}/report` — ringkasan pertandingan (report).
 - GET `/matches/standing` — standing tabel.
 - POST `/matches` — buat pertandingan:
@@ -254,7 +251,7 @@ Contoh dan kasus error seperti `409 Conflict` (nomer punggung duplicate) ada di 
   "minute": "90"
 }
 ```
-Contoh lengkap dan sample response ada di collection `Goals`. fileciteturn0file1
+Contoh lengkap dan sample response ada di collection `Goals`. 
 
 ---
 
@@ -278,12 +275,11 @@ Error: `data` biasanya `null` dan message menjelaskan error.
 - 403 Forbidden untuk akses role yang tidak cukup  
 - 404 Not Found saat resource tidak ada  
 - 409 Conflict untuk duplicate constraint (contoh jersey_number)  
-Detail status dan pesan error dapat dilihat pada response contoh di Postman Collection. fileciteturn0file1
+Detail status dan pesan error dapat dilihat pada response contoh di Postman Collection. 
 
 ---
 
-## 🧩 ERD (Mermaid)
-Gunakan di GitHub yang mendukung Mermaid:
+## 🧩 ERD
 
 ```mermaid
 erDiagram
@@ -356,22 +352,22 @@ services:
 ---
 
 ## 🧪 Import & Run Collection (Postman)
-1. Import collection `Football Backend API.postman_collection.json`. fileciteturn0file1  
-2. Import environment `Football Backend Environment.postman_environment.json`. fileciteturn0file0  
+1. Import collection `Football Backend API.postman_collection.json`. 
+2. Import environment `Football Backend Environment.postman_environment.json`.  
 3. Pilih environment, jalankan `Auth → Login` untuk set token.  
 4. Gunakan folder-folder di collection (Auth, Goals, Matches, Players, Teams) untuk testing.
 
 ---
 
 ## ❗ Troubleshooting & FAQ
-- **Token tidak tersimpan**: Pastikan Postman environment dipilih dan script `test` pada request Login aktif. fileciteturn0file1  
-- **409 saat create player**: Nomor punggung sudah digunakan di tim tersebut. Ubah `jersey_number`. fileciteturn0file1  
+- **Token tidak tersimpan**: Pastikan Postman environment dipilih dan script `test` pada request Login aktif. 
+- **409 saat create player**: Nomor punggung sudah digunakan di tim tersebut. Ubah `jersey_number`. 
 - **DB connection refused**: Pastikan DB berjalan & `.env` sesuai.
 
 ---
 
 ## 📦 Files Postman
-- Football Backend API.postman_collection.json — collection API. fileciteturn0file1  
+- Football Backend API.postman_collection.json — collection API. 
 - Football Backend Environment.postman_environment.json — environment vars (base_url, token, refresh_token). fileciteturn0file0
 
 ---
