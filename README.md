@@ -71,7 +71,9 @@ Server default berjalan di `http://localhost:8080` (atau `{{base_url}}` sesuai e
 ---
 
 ## 📥 Import Postman Collection (cara cepat)
-1. Buka Postman → Import → pilih `Football Backend API.postman_collection.json` (file Anda). 
+[POSTMAN Collection](https://github.com/myst-al/football-backend/blob/master/Football%20Backend%20API.postman_collection.json)
+[POSTMAN Environment](https://github.com/myst-al/football-backend/blob/master/Football%20Backend%20Environment.postman_environment.json)
+1. Buka Postman → Import → pilih `Football Backend API.postman_collection.json`. 
 2. Import Environment: `Football Backend Environment.postman_environment.json`.  
 3. Set variable `base_url` jika perlu (default: `http://localhost:8080/api/v1`).  
 4. Jalankan request `Auth → Login` untuk mendapatkan token. Skrip otomatis akan menyimpan `token` & `refresh_token` ke environment. (Script ada pada request Login & Refresh di collection). 
