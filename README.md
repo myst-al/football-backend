@@ -292,8 +292,6 @@ erDiagram
     TEAMS ||--o{ MATCHES : hosts
 ```
 
-(ERD visual PNG bisa dibuat jika diperlukan.)
-
 ---
 
 ## 🐳 Deployment (Docker) — contoh
