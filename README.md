@@ -86,7 +86,6 @@ Server default berjalan di `http://localhost:8080` (atau `{{base_url}}` sesuai e
 ```
 {{base_url}} = http://localhost:8080/api/v1
 ```
-(Atur di Postman Environment). fileciteturn0file0
 
 ---
 
@@ -175,8 +174,6 @@ Contoh ada di collection `Auth → Register`.
 - GET `/users`  
 - GET `/users/{id}`  
 - PUT `/users/{id}`
-
-(Tambahkan field sesuai DTO `user_dto.go` di project.)
 
 ---
 
@@ -368,7 +365,7 @@ services:
 
 ## 📦 Files Postman
 - Football Backend API.postman_collection.json — collection API. 
-- Football Backend Environment.postman_environment.json — environment vars (base_url, token, refresh_token). fileciteturn0file0
+- Football Backend Environment.postman_environment.json — environment vars (base_url, token, refresh_token).
 
 ---
 
